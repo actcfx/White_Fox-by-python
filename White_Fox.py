@@ -7,6 +7,14 @@ client = commands.Bot(command_prefix = '/', intents = intents)
 # 連上線時的事件
 @client.event
 async def on_ready():
-    print(f"-> Logged in as {client.user}!")
+    print(f'-> Logged in as {client.user}!')
     
-client.run("OTkxMDQzMjY2Mjk0MjA2NDk0.Gm3I-r.BIsetmkLIJt4jVNYa3Mcbv_G09qRQFnDZzj4Mg")
+@client.event
+async def on_member_join(member):
+    print(f'-> <@{member.id}> join {member.guild.name} server')
+
+@client.event
+async def on_member_remove(member):
+    print(f'-> <@{member.id}> leave {member.guild.name} server')
+    
+client.run("OTkxMDQzMjY2Mjk0MjA2NDk0.GWwOKW.UEy-y0CvyeOWaaWKew7TUVIPk23qocH7ChND3c")
