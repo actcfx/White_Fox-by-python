@@ -44,13 +44,13 @@ async def on_message(msg):
             cmd = msg.content.strip('/')
             cmd = cmd.split(' ')
             match(cmd[0]):
-                case 'ping':
+                case 'say':
                     if len(cmd) > 1:
                         await msg.channel.send(cmd[1])
                         print(f"-> Send '{cmd[1]}' to '{msg.channel.name}'")
                     else:
-                        await msg.channel.send('ping')
-                        print(f"-> Send 'ping' to '{msg.channel.name}'")
+                        await msg.channel.send('say')
+                        print(f"-> Send 'say' to '{msg.channel.name}'")
                     await msg.delete(delay = 1.0)   ##延遲單位為秒
                 case '老婆':
                     if msg.author.id == 407881227270356994:
