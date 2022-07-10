@@ -1,18 +1,14 @@
-import nextcord
-from nextcord.ext import commands
-intents = nextcord.Intents.all()
+import discord
+from discord.ext import commands
+intents = discord.Intents.all()
 client = commands.Bot(command_prefix='/', intents=intents)
 
 # 連上線時的事件
-
-
 @client.event
 async def on_ready():
     print(f'-> Logged in as {client.user}!')
 
 # 成員加入時的事件
-
-
 @client.event
 async def on_member_join(member):
     match(member.guild.id):
@@ -24,8 +20,6 @@ async def on_member_join(member):
     print(f"-> {member} join '{member.guild.name}' server")
 
 # 成員離開時的事件
-
-
 @client.event
 async def on_member_remove(member):
     match(member.guild.id):
@@ -36,7 +30,7 @@ async def on_member_remove(member):
     await channel.send(f'{member.mention} 離開了{member.guild.name}伺服器，一路好走！')
     print(f"-> {member} leave '{member.guild.name}' server")
 
-
+# 當有人發送訊息時的事件
 @client.event
 async def on_message(msg):
     if msg.channel.id == 992721929008066591 or msg.channel.id == 992026961494941726:
