@@ -1,6 +1,6 @@
-import discord
-from discord.ext import commands
-intents = discord.Intents.all()
+import nextcord
+from nextcord.ext import commands
+intents = nextcord.Intents.all()
 client = commands.Bot(command_prefix='/', intents=intents)
 
 # 連上線時的事件
@@ -43,9 +43,9 @@ async def on_message(msg):
                         await msg.channel.send(cmd[1])
                         print(f"-> Send '{cmd[1]}' to '{msg.channel.name}'")
                     else:
-                        await msg.channel.send('say')
+                        await msg.channel.send('/say')
                         print(f"-> Send 'say' to '{msg.channel.name}'")
-                    await msg.delete(delay = 1.0)   ##延遲單位為秒
+                    await msg.delete(delay = 0.5)   ##延遲單位為秒
                 case '老婆':
                     if msg.author.id == 407881227270356994:
                         await msg.reply('嗨！')
