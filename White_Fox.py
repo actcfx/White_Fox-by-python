@@ -33,6 +33,8 @@ async def on_member_remove(member):
 # 當有人發送訊息時的事件
 @client.event
 async def on_message(msg):
+    if msg.author.bot:
+        return
     if msg.channel.id == 992721929008066591 or msg.channel.id == 992026961494941726:
         if msg.content[0] == '/':
             cmd = msg.content.strip('/')
@@ -43,9 +45,11 @@ async def on_message(msg):
                         await msg.channel.send(cmd[1])
                         print(f"-> Send '{cmd[1]}' to '{msg.channel.name}'")
                     else:
-                        await msg.channel.send('/say')
-                        print(f"-> Send 'say' to '{msg.channel.name}'")
-                    await msg.delete(delay = 0.5)   ##延遲單位為秒
+                        await msg.delete(delay = 1)   ##延遲單位為秒
+                        await msg.channel.send('hi', delete_after = 1)
+                        print(f"-> Send 'hi' to '{msg.channel.name}'")
+                        print("-> Delete 'hi' form bot's reply")
+                        print(f"-> Delete {msg.author}'s message")
                 case '老婆':
                     if msg.author.id == 407881227270356994:
                         await msg.reply('嗨！')
