@@ -1,7 +1,17 @@
 import nextcord
 from nextcord.ext import commands
+import json
 intents = nextcord.Intents.all()
 client = commands.Bot(command_prefix='/', intents=intents)
+
+with open ('token.json', mode = 'r', encoding='utf8') as token:
+    token_data = json.load(token)
+
+with open ('guildID.json', mode = 'r', encoding = 'utf8') as guildID:
+    guildID_data = json.load(guildID)
+
+with open ('channelID.json', mode = 'r', encoding = 'utf8') as channelID:
+    channelID_data = json.load(channelID)
 
 # 連上線時的事件
 @client.event
@@ -11,11 +21,10 @@ async def on_ready():
 # 成員加入時的事件
 @client.event
 async def on_member_join(member):
-    match(member.guild.id):
-        case 991002551979737109:
-            channel = client.get_channel(991020606587822181)
-        case 875245594355068958:
-            channel = client.get_channel(994376068293202101)
+    if member.guild.id == guildID_data['測試bot用_ID']:
+        channel = client.get_channel(channelID_data['wel_ch_ID_1'])
+    elif member.guild.id == guildID_data['Nationalsozialistische-Deutschland_ID']:
+        channel = client.get_channel(channelID_data['wel_ch_ID_2'])
     await channel.send(f'歡迎 {member.mention} 加入{member.guild.name}伺服器，玩的開心！')
     print(f"-> {member} join '{member.guild.name}' server")
 
@@ -35,6 +44,10 @@ async def on_member_remove(member):
 async def on_message(msg):
     if msg.author.bot:
         return
+    match(msg.content):
+        case 'wtf':
+            await msg.channel.send('wtf')
+            print(f"-> Send 'wtf' to {msg.channel.name}")
     if msg.channel.id == 992721929008066591 or msg.channel.id == 992026961494941726:
         if msg.content[0] == '/':
             cmd = msg.content.strip('/')
@@ -45,9 +58,9 @@ async def on_message(msg):
                         await msg.channel.send(cmd[1])
                         print(f"-> Send '{cmd[1]}' to '{msg.channel.name}'")
                     else:
-                        await msg.delete(delay = 1)   ##延遲單位為秒
-                        await msg.channel.send('hi', delete_after = 1)
-                        print(f"-> Send 'hi' to '{msg.channel.name}'")
+                        await msg.delete(delay=1)  # 延遲單位為秒
+                        await msg.channel.send('hi', delete_after=1)
+                        print(f"-> Send 'hi' to {msg.channel.name}")
                         print("-> Delete 'hi' form bot's reply")
                         print(f"-> Delete {msg.author}'s message")
                 case '老婆':
@@ -58,4 +71,5 @@ async def on_message(msg):
                         await msg.reply('你沒有老婆！')
                         print(f"-> Reply '你沒有老婆！' to {msg.author}")
 
-client.run("OTkxMDQzMjY2Mjk0MjA2NDk0.G_pnhZ.KVXQfButK8cRdDeUe5fjTffo98AE7AIcVXkjpc")
+
+client.run(token_data['token'])
