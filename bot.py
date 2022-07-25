@@ -3,7 +3,7 @@ import random
 import nextcord
 from nextcord.ext import commands
 intents = nextcord.Intents.all()
-client = commands.Bot(command_prefix = '/', intents = intents)
+client = commands.Bot(intents = intents)
 
 with open('token.json', mode = 'r', encoding = 'utf8') as token:
     token_data = json.load(token)
