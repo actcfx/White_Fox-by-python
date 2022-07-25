@@ -3,25 +3,21 @@ import random
 import nextcord
 from nextcord.ext import commands
 intents = nextcord.Intents.all()
-client = commands.Bot(command_prefix='/', intents=intents)
+client = commands.Bot(command_prefix = '/', intents = intents)
 
-with open('token.json', mode='r', encoding='utf8') as token:
+with open('token.json', mode = 'r', encoding = 'utf8') as token:
     token_data = json.load(token)
-with open('guildID.json', mode='r', encoding='utf8') as guildID:
+with open('guildID.json', mode = 'r', encoding = 'utf8') as guildID:
     guildID_data = json.load(guildID)
-with open('channelID.json', mode='r', encoding='utf8') as channelID:
+with open('channelID.json', mode = 'r', encoding = 'utf8') as channelID:
     channelID_data = json.load(channelID)
 
 # 連上線時的事件
-
-
 @client.event
 async def on_ready():
     print(f'-> Logged in as {client.user}!')
 
 # 成員加入時的事件
-
-
 @client.event
 async def on_member_join(member):
     if member.guild.id == guildID_data['測試bot用_ID']:
@@ -32,8 +28,6 @@ async def on_member_join(member):
     print(f"-> {member} join '{member.guild.name}' server")
 
 # 成員離開時的事件
-
-
 @client.event
 async def on_member_remove(member):
     if member.guild.id == guildID_data['測試bot用_ID']:
@@ -44,8 +38,6 @@ async def on_member_remove(member):
     print(f"-> {member} leave '{member.guild.name}' server")
 
 # 當有人發送訊息時的事件
-
-
 @client.event
 async def on_message(ctx):
     if ctx.author.bot:
