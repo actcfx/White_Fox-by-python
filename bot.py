@@ -7,25 +7,11 @@ client = commands.Bot(intents = intents)
 
 with open('token.json', mode = 'r', encoding = 'utf8') as token:
     token_data = json.load(token)
-with open('guildID.json', mode = 'r', encoding = 'utf8') as guildID:
-    guildID_data = json.load(guildID)
-with open('channelID.json', mode = 'r', encoding = 'utf8') as channelID:
-    channelID_data = json.load(channelID)
 
 # 連上線時的事件
 @client.event
 async def on_ready():
     print(f'-> Logged in as {client.user}!')
-
-# 成員加入時的事件
-@client.event
-async def on_member_join(member):
-    if member.guild.id == guildID_data['測試bot用_ID']:
-        channel = client.get_channel(channelID_data['wel_ch_ID_1'])
-    elif member.guild.id == guildID_data['Nationalsozialistische-Deutschland_ID']:
-        channel = client.get_channel(channelID_data['wel_ch_ID_2'])
-    await channel.send(f'歡迎 {member.mention} 加入{member.guild.name}伺服器，玩的開心！')
-    print(f"-> {member} join '{member.guild.name}' server")
 
 # 成員離開時的事件
 @client.event
