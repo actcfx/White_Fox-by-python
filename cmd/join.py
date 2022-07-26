@@ -1,9 +1,7 @@
 import json
-from pydoc import cli
 import nextcord
 from nextcord.ext import commands
 from core.classes import Cog_Extension
-intents = nextcord.Intents.all()
 
 with open('../White_Fox-by-python/ID/guildID.json', mode = 'r', encoding = 'utf8') as guildID:
     guildID_data = json.load(guildID)

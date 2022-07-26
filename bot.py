@@ -5,23 +5,13 @@ from nextcord.ext import commands
 intents = nextcord.Intents.all()
 client = commands.Bot(intents = intents)
 
-with open('token.json', mode = 'r', encoding = 'utf8') as token:
+with open('../White_Fox-by-python/token.json', mode = 'r', encoding = 'utf8') as token:
     token_data = json.load(token)
 
 # 連上線時的事件
 @client.event
 async def on_ready():
     print(f'-> Logged in as {client.user}!')
-
-# 成員離開時的事件
-@client.event
-async def on_member_remove(member):
-    if member.guild.id == guildID_data['測試bot用_ID']:
-        channel = client.get_channel(channelID_data['wel_ch_ID_1'])
-    elif member.guild.id == guildID_data['Nationalsozialistische-Deutschland_ID']:
-        channel = client.get_channel(channelID_data['wel_ch_ID_2'])
-    await channel.send(f'{member.mention} 離開了{member.guild.name}伺服器，一路好走！')
-    print(f"-> {member} leave '{member.guild.name}' server")
 
 # 當有人發送訊息時的事件
 @client.event
@@ -33,9 +23,9 @@ async def on_message(ctx):
             await ctx.channel.send('wtf')
             print(f"-> Send 'wtf' to {ctx.channel.name}")
 
-    if ctx.channel.id == 992721929008066591 or ctx.channel.id == 992026961494941726:
-        if ctx.content[0] == '/':
-            cmd = ctx.content.strip('/')
+    if ctx.channel.id == 992721929008066591 or ctx.channel.id == 992026961494941726 or ctx.channel.id == 1001198121952489623:
+        if ctx.content[0] == '!':
+            cmd = ctx.content.strip('!')
             cmd = cmd.split(' ')
             match(cmd[0]):
                 case 'say':
@@ -63,7 +53,7 @@ async def on_message(ctx):
 def luck():
     rnd = random.randint(0, 5)
     pic = nextcord.File(f"../White_Fox-by-python/luck_image/luck_{rnd}.jpg")
-    print(f"-> Luck successful, rnd is {rnd}")
+    print(f"-> Luck successful! Rnd is {rnd}")
     return pic
 
 client.run(token_data['token'])
