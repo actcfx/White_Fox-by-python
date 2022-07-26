@@ -38,11 +38,6 @@ async def on_member_remove(member):
     await channel.send(f'{member.mention} 離開了{member.guild.name}伺服器，一路好走！')
     print(f"-> {member} leave '{member.guild.name}' server")
 
-@bot.command()
-async def ping(ctx):
-    await ctx.send(f"ping:{round(bot.latency*1000)}ms")
-    print(f"-> {bot.user} ping is {round(bot.latency*1000)}ms")
-
 '''# 當有人發送訊息時的事件
 @bot.event
 async def on_message(ctx):
