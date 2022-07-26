@@ -1,20 +1,50 @@
 import json
+import os
 import random
 import nextcord
 from nextcord.ext import commands
 intents = nextcord.Intents.all()
-client = commands.Bot(intents = intents)
+bot = commands.Bot(command_prefix = '!', intents = intents)
 
 with open('../White_Fox-by-python/token.json', mode = 'r', encoding = 'utf8') as token:
     token_data = json.load(token)
+with open('../White_Fox-by-python/ID/guildID.json', mode = 'r', encoding = 'utf8') as guildID:
+    guildID_data = json.load(guildID)
+with open('../White_Fox-by-python/ID/channelID.json', mode = 'r', encoding = 'utf8') as channelID:
+    channelID_data = json.load(channelID)
 
 # 連上線時的事件
-@client.event
+@bot.event
 async def on_ready():
-    print(f'-> Logged in as {client.user}!')
+    print(f'-> Logged in as {bot.user}!')
 
-# 當有人發送訊息時的事件
-@client.event
+# 成員加入時的事件
+@bot.event
+async def on_member_join(member):
+    if member.guild.id == guildID_data['測試bot用_ID']:
+        channel = bot.get_channel(channelID_data['wel_ch_ID_1'])
+    elif member.guild.id == guildID_data['Nationalsozialistische-Deutschland_ID']:
+        channel = bot.get_channel(channelID_data['wel_ch_ID_2'])
+    await channel.send(f'歡迎 {member.mention} 加入{member.guild.name}伺服器，玩的開心！')
+    print(f"-> {member} join '{member.guild.name}' server")
+
+# 成員離開時的事件
+@bot.event
+async def on_member_remove(member):
+    if member.guild.id == guildID_data['測試bot用_ID']:
+        channel = bot.get_channel(channelID_data['wel_ch_ID_1'])
+    elif member.guild.id == guildID_data['Nationalsozialistische-Deutschland_ID']:
+        channel = bot.get_channel(channelID_data['wel_ch_ID_2'])
+    await channel.send(f'{member.mention} 離開了{member.guild.name}伺服器，一路好走！')
+    print(f"-> {member} leave '{member.guild.name}' server")
+
+@bot.command()
+async def ping(ctx):
+    await ctx.send(f"ping:{round(bot.latency*1000)}ms")
+    print(f"-> {bot.user} ping is {round(bot.latency*1000)}ms")
+
+'''# 當有人發送訊息時的事件
+@bot.event
 async def on_message(ctx):
     if ctx.author.bot:
         return
@@ -48,7 +78,7 @@ async def on_message(ctx):
                 case 'luck':
                     pic = luck()
                     await ctx.reply(file = pic)
-                    print(f"-> Reply 'luck' to {ctx.author}")
+                    print(f"-> Reply 'luck' to {ctx.author}")'''
 
 def luck():
     rnd = random.randint(0, 5)
@@ -56,4 +86,10 @@ def luck():
     print(f"-> Luck successful! Rnd is {rnd}")
     return pic
 
-client.run(token_data['token'])
+for Filename in os.listdir('./cmds'):
+    if Filename.endswith('.py'):
+##        print(Filename)
+        bot.load_extension(f'cmds.{Filename[:-3]}')
+
+if __name__ == '__main__':
+    bot.run(token_data['token'])
