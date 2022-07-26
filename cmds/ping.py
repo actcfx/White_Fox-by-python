@@ -12,4 +12,4 @@ class ping(Cog_Extension):
         print(f"-> {self.bot.user} ping is {round(self.bot.latency*1000)}ms")
 
 def setup(bot):
-    bot.add_ping(ping(bot))
+    bot.add_cog(ping(bot))

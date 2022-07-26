@@ -9,6 +9,7 @@ class DD(Cog_Extension):
     @commands.command()
     async def DD(self, ctx):
         await ctx.reply(f"你是說<@300201809623121922>嗎")
+        print(f"-> 黑糖#0525 is DD, DD斬首")
 
 def setup(bot):
     bot.add_cog(DD(bot))

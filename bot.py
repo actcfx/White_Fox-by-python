@@ -3,10 +3,10 @@ import os
 import random
 import nextcord
 from nextcord.ext import commands
-intents = nextcord.Intents.all()
-bot = commands.Bot(command_prefix = '!', intents = intents)
+bot = commands.Bot(command_prefix = '!', intents = nextcord.Intents.all())
+prefix = '!'
 
-with open('../White_Fox-by-python/token.json', mode = 'r', encoding = 'utf8') as token:
+with open('token.json', mode = 'r', encoding = 'utf8') as token:
     token_data = json.load(token)
 with open('../White_Fox-by-python/ID/guildID.json', mode = 'r', encoding = 'utf8') as guildID:
     guildID_data = json.load(guildID)
@@ -38,7 +38,7 @@ async def on_member_remove(member):
     await channel.send(f'{member.mention} 離開了{member.guild.name}伺服器，一路好走！')
     print(f"-> {member} leave '{member.guild.name}' server")
 
-'''# 當有人發送訊息時的事件
+# 當有人發送訊息時的事件
 @bot.event
 async def on_message(ctx):
     if ctx.author.bot:
@@ -49,8 +49,8 @@ async def on_message(ctx):
             print(f"-> Send 'wtf' to {ctx.channel.name}")
 
     if ctx.channel.id == 992721929008066591 or ctx.channel.id == 992026961494941726 or ctx.channel.id == 1001198121952489623:
-        if ctx.content[0] == '!':
-            cmd = ctx.content.strip('!')
+        if ctx.content[0] == prefix:
+            cmd = ctx.content.strip(prefix)
             cmd = cmd.split(' ')
             match(cmd[0]):
                 case 'say':
@@ -73,7 +73,7 @@ async def on_message(ctx):
                 case 'luck':
                     pic = luck()
                     await ctx.reply(file = pic)
-                    print(f"-> Reply 'luck' to {ctx.author}")'''
+                    print(f"-> Reply 'luck' to {ctx.author}")
 
 def luck():
     rnd = random.randint(0, 5)
