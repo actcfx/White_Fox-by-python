@@ -8,41 +8,24 @@ prefix = '!'
 
 with open('token.json', mode = 'r', encoding = 'utf8') as token:
     token_data = json.load(token)
-with open('../White_Fox-by-python/ID/guildID.json', mode = 'r', encoding = 'utf8') as guildID:
-    guildID_data = json.load(guildID)
-with open('../White_Fox-by-python/ID/channelID.json', mode = 'r', encoding = 'utf8') as channelID:
-    channelID_data = json.load(channelID)
 
 # 連上線時的事件
 @bot.event
 async def on_ready():
     print(f'-> Logged in as {bot.user}!')
 
-# 成員加入時的事件
-@bot.event
-async def on_member_join(member):
-    if member.guild.id == guildID_data['測試bot用_ID']:
-        channel = bot.get_channel(channelID_data['wel_ch_ID_1'])
-    elif member.guild.id == guildID_data['Nationalsozialistische-Deutschland_ID']:
-        channel = bot.get_channel(channelID_data['wel_ch_ID_2'])
-    await channel.send(f'歡迎 {member.mention} 加入{member.guild.name}伺服器，玩的開心！')
-    print(f"-> {member} join '{member.guild.name}' server")
-
-# 成員離開時的事件
-@bot.event
-async def on_member_remove(member):
-    if member.guild.id == guildID_data['測試bot用_ID']:
-        channel = bot.get_channel(channelID_data['wel_ch_ID_1'])
-    elif member.guild.id == guildID_data['Nationalsozialistische-Deutschland_ID']:
-        channel = bot.get_channel(channelID_data['wel_ch_ID_2'])
-    await channel.send(f'{member.mention} 離開了{member.guild.name}伺服器，一路好走！')
-    print(f"-> {member} leave '{member.guild.name}' server")
-
 # 當有人發送訊息時的事件
 @bot.event
 async def on_message(ctx):
     if ctx.author.bot:
         return
+
+    if '@' in ctx.content:
+        cmd = ctx.content.strip('@')
+        cmd = cmd.split(' ')
+        await ctx.channel.send(f'{cmd[0]}')
+        print(f"-> Send {cmd[0]} to {ctx.channel.name}")
+
     match(ctx.content):
         case 'wtf':
             await ctx.channel.send('wtf')
@@ -74,6 +57,7 @@ async def on_message(ctx):
                     pic = luck()
                     await ctx.reply(file = pic)
                     print(f"-> Reply 'luck' to {ctx.author}")
+    await bot.process_commands(ctx)
 
 def luck():
     rnd = random.randint(0, 5)
