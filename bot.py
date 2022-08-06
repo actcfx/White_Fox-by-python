@@ -14,7 +14,7 @@ with open('token.json', mode = 'r', encoding = 'utf8') as token:
 async def on_ready():
     print(f'-> Logged in as {bot.user}!')
 
-# 當有人發送訊息時的事件
+'''# 當有人發送訊息時的事件
 @bot.event
 async def on_message(ctx):
     if ctx.author.bot:
@@ -57,7 +57,7 @@ async def on_message(ctx):
                     pic = luck()
                     await ctx.reply(file = pic)
                     print(f"-> Reply 'luck' to {ctx.author}")
-    await bot.process_commands(ctx)
+    await bot.process_commands(ctx)'''
 
 def luck():
     rnd = random.randint(0, 5)
