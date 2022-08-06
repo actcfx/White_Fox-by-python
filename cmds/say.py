@@ -11,7 +11,7 @@ class say(Cog_Extension):
     async def on_message(self, ctx):
         if ctx.author.bot:
             return
-    
+
         if ctx.content[0] == prefix:
             if ctx.channel.id == 992721929008066591 or ctx.channel.id == 992026961494941726 or ctx.channel.id == 1001198121952489623:
                 cmd = ctx.content.strip(prefix)
@@ -23,7 +23,6 @@ class say(Cog_Extension):
                     else:
                         await ctx.channel.send('hi')
                         print(f"-> Send 'hi' to {ctx.channel.name}")
-        await self.bot.process_commands(ctx)
 
 def setup(bot):
     bot.add_cog(say(bot))
