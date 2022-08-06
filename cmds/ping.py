@@ -8,8 +8,8 @@ class ping(Cog_Extension):
 
     @commands.command()
     async def ping(self, ctx):
-        await ctx.send(f"ping:{round(self.bot.latency*1000)}ms")
-        print(f"-> {self.bot.user} ping is {round(self.bot.latency*1000)}ms")
+        await ctx.send(f"ping:{round(self.bot.latency * 1000)}ms")
+        print(f"-> {self.bot.user} ping is {round(self.bot.latency * 1000)}ms")
 
 def setup(bot):
     bot.add_cog(ping(bot))
