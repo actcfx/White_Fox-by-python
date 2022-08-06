@@ -59,12 +59,6 @@ async def on_message(ctx):
                     print(f"-> Reply 'luck' to {ctx.author}")
     await bot.process_commands(ctx)'''
 
-def luck():
-    rnd = random.randint(0, 5)
-    pic = nextcord.File(f"../White_Fox-by-python/luck_image/luck_{rnd}.jpg")
-    print(f"-> Luck successful! Rnd is {rnd}")
-    return pic
-
 for Filename in os.listdir('./cmds'):
     if Filename.endswith('.py'):
 ##        print(Filename)
