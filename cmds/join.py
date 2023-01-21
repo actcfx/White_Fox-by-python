@@ -1,5 +1,6 @@
 import json
 import nextcord
+import json
 from nextcord.ext import commands
 from core.classes import Cog_Extension
 

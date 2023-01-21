@@ -53,16 +53,13 @@ async def on_message(ctx):
                     else:
                         await ctx.reply('你沒有老婆！')
                         print(f"-> Reply '你沒有老婆！' to {ctx.author}")
-                case 'luck':
-                    pic = luck()
-                    await ctx.reply(file = pic)
-                    print(f"-> Reply 'luck' to {ctx.author}")
     await bot.process_commands(ctx)'''
 
 for Filename in os.listdir('./cmds'):
     if Filename.endswith('.py'):
 ##        print(Filename)
         bot.load_extension(f'cmds.{Filename[:-3]}')
+##        bot.load_extension(f'cod.{Filename[:-3]}')
 
 if __name__ == '__main__':
     bot.run(token_data['token'])
