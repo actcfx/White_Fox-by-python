@@ -1,3 +1,7 @@
-token.json
-channelID.json
-guildID.json
+/token.json
+/channelID.json
+/guildID.json
+
+/__pycathe__
+/cmds/__pycathe__
+/core/__pycathe__
