@@ -4,10 +4,6 @@ import json
 from nextcord.ext import commands
 from core.classes import Cog_Extension
 
-'''with open('../White_Fox-by-python/ID/guildID.json', mode = 'r', encoding = 'utf8') as guildID:
-    guildID_data = json.load(guildID)
-with open('../White_Fox-by-python/ID/channelID.json', mode = 'r', encoding = 'utf8') as channelID:
-    channelID_data = json.load(channelID)'''
 
 class Join(Cog_Extension):
     def __init__(self, bot):
