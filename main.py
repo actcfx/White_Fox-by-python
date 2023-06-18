@@ -1,5 +1,5 @@
-import json
 import os
+import json
 import random
 import nextcord
 from nextcord.ext import commands
@@ -20,7 +20,7 @@ async def ping(ctx):
     await ctx.send(f'ping:{ping}ms')
     print(f'<-> {bot.user} ping is {ping}ms')
 
-
+    
 @bot.command()
 @commands.is_owner()
 async def load(ctx, extension):
