@@ -19,19 +19,19 @@ class Routine(Cog_Extension):
         try:
             WIFE_CHANNEL = self.bot.get_channel(WIFE_CHANNEL_ID)
             while routine:
-                now = time.strftime('%Y/%m/%d %H:%M:%S', time.localtime())      #get current time (date and time)
-                now_hr = time.strftime("%H", time.localtime())      #get current time (only date)
+                now = time.strftime('%Y/%m/%d %H:%M:%S', time.localtime())  # get current time (date and time)
+                now_hr = time.strftime("%H", time.localtime())  # get current time (only date)
 
-                delta = GRADUATE_DATE - datetime.now()          #get delta time
-                days, seconds = delta.days, delta.seconds       #convert seconds to days
-                hours, seconds = divmod(seconds, 3600)          #convert seconds to hours
-                minutes, seconds = divmod(seconds, 60)          #convert seconds to minutes
-                delta_time = f"{days}天{hours}小時{minutes}分{seconds}秒"       #convert to str
+                delta = GRADUATE_DATE - datetime.now()      # get delta time
+                days, seconds = delta.days, delta.seconds   # convert seconds to days
+                hours, seconds = divmod(seconds, 3600)      # convert seconds to hours
+                minutes, seconds = divmod(seconds, 60)      # convert seconds to minutes
+                delta_time = f"{days}天{hours}小時{minutes}分{seconds}秒"   # convert to str
 
                 if now_hr == "08":
                     await WIFE_CHANNEL.send(f"現在是{now}，距離賤臣老婆畢業還有{delta_time}，記得提醒賤臣醒來！")
                     print(f"<>距離老婆貓畢業還有{delta_time}")
-                await asyncio.sleep(3600)       #wait 1 hour
+                await asyncio.sleep(3600)  # wait 1 hour
 
         except Exception as err:
             await WIFE_CHANNEL.send(f"Routine catch error: ```{err}```")

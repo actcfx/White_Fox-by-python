@@ -13,7 +13,7 @@ class Luck(Cog_Extension):
     @commands.command()
     async def luck(self, ctx):
         try:
-            with open('luck.json', 'r', encoding = 'utf-8') as luck:
+            with open('luck.json', 'r', encoding='utf-8') as luck:
                 luck_data = json.load(luck)
             now_time = time.strftime('%Y, %m, %d', time.localtime())
 
@@ -26,11 +26,11 @@ class Luck(Cog_Extension):
                 pass
 
             luck_data[f'{ctx.author.id}'] = now_time
-            with open('luck.json', 'w', encoding = 'utf-8') as luck:
-                json.dump(luck_data, luck, indent = 4, ensure_ascii = False)
+            with open('luck.json', 'w', encoding='utf-8') as luck:
+                json.dump(luck_data, luck, indent=4, ensure_ascii=False)
             luck_random = random.randint(0, 5)
             luck_pic = nextcord.File(f"luck_image/luck_{luck_random}.jpg")
-            await ctx.reply(file = luck_pic)
+            await ctx.reply(file=luck_pic)
             print(f"<> {ctx.author}'s luck is {luck_random}")
 
         except Exception as err:

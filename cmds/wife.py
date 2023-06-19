@@ -22,25 +22,26 @@ class Wife(Cog_Extension):
                 luck_img_list = json.load(luck_img)
             WIFE_CHANNEL = self.bot.get_channel(WIFE_CHANNEL_ID)
             now_date = time.strftime('%Y/%m/%d', time.localtime())
-            luck_random = random.randint(0, 5)      #random luck_img number
+            luck_random = random.randint(0, 5)  # random luck_img number
 
             embed = nextcord.Embed(description=f"{now_date} 簽到成功",
                                    color=nextcord.Colour.random(),
                                    timestamp=datetime.datetime.now())
-            embed.set_author(name=f"{interaction.user.name}", icon_url=f"{interaction.user.avatar}")
+            embed.set_author(name=f"{interaction.user.name}",
+                             icon_url=f"{interaction.user.avatar}")
             embed.set_image(url=f"{luck_img_list[luck_random]}")
 
             try:
-                if (luck_data[f'{interaction.user.id}'] == now_date):       #already signed in
+                if (luck_data[f'{interaction.user.id}'] == now_date):  # already signed in
                     await interaction.response.send_message("你今天已經提醒過賤臣囉", ephemeral=True)
                     print(f'>err< Wife slash_cmd: {interaction.user.name} already signed in')
                     return
             except:
                 pass
 
-            luck_data[f"{interaction.user.id}"] = now_date      #note down the sign date
-            with open('luck.json', 'w', encoding = 'utf-8') as luck:        #write to json
-                json.dump(luck_data, luck, indent = 4, ensure_ascii = False)
+            luck_data[f"{interaction.user.id}"] = now_date  # note down the sign date
+            with open('luck.json', 'w', encoding='utf-8') as luck:  # write to json
+                json.dump(luck_data, luck, indent=4, ensure_ascii=False)
 
             await interaction.response.send_message("<@616997647231746106> 今天你老婆畢業了嗎")
             await WIFE_CHANNEL.send("https://media.discordapp.net/attachments/1061199217923719240/1119262719279902750/1686923406759.jpg?width=686&height=686")
