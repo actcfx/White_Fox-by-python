@@ -13,7 +13,7 @@ class Wife(Cog_Extension):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    @nextcord.slash_command(name="每日關心賤臣的老婆畢業多久了", description="每日任務")
+    @nextcord.slash_command(name="每日關心賤臣的老婆畢業了沒", description="每日任務")
     async def graduate(self, interaction: nextcord.Interaction):
         try:
             with open("luck.json", "r", encoding="utf-8") as luck:
@@ -39,12 +39,11 @@ class Wife(Cog_Extension):
             except:
                 pass
 
-            # note down the sign date
-            luck_data[f"{interaction.user.id}"] = now_date
+            luck_data[f"{interaction.user.id}"] = now_date  # note down the sign date
             with open('luck.json', 'w', encoding='utf-8') as luck:  # write to json
                 json.dump(luck_data, luck, indent=4, ensure_ascii=False)
 
-            await interaction.response.send_message("<@616997647231746106> 今天你老婆已經畢業了")
+            await interaction.response.send_message("<@616997647231746106> 今天你老婆畢業了嗎")
             await WIFE_CHANNEL.send("https://media.discordapp.net/attachments/1061199217923719240/1119262719279902750/1686923406759.jpg?width=686&height=686")
             await WIFE_CHANNEL.send(embed=embed)
 

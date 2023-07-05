@@ -13,8 +13,8 @@ class Delete_Message(Cog_Extension):
             print(f"<> Deleted {num} messages from #{interaction.channel.name}")
 
         except Exception as err:
-            await interaction.channel.send(f"Purge slash_cmd catch error: {err}")
-            print(f">err< Purge slash_cmd: {err}")
+            await interaction.channel.send(f"Purge slash_cmd catch error: ```{err}```")
+            print(f">err< Purge slash_cmd: ```{err}```")
 
 
 def setup(bot):
